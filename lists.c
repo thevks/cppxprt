@@ -36,6 +36,7 @@ void printList(node_t *root)
     printf("\n");
 }
 
+//Compares two lists
 int compare_lists(node_t *p, node_t *q)
 {
     static int flag;
