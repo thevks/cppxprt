@@ -22,13 +22,56 @@ bst_node::bst_node(int item)
 class BST
 {
     public:
-        bst_node *root = NULL;
-        void add_node(int item);
-        //void _add_node(bst_node **node, int item);
-        void in_order_traversal();
-        void _in_order_traversal(bst_node *node);
-        bst_node *insert(bst_node *node, int item);
         BST(vector<int> items);
+
+        bst_node *root = NULL;
+
+        void add_node(int item);
+				void delete_node(int item);
+
+				vector<bst_node *> get_diameter_nodes();
+				vector<bst_node *> get_max_path_nodes();
+
+				//Get all nodes, matching with target and at distance k
+				vector<bst_node *> get_k_distance_nodes(int target, int k);
+
+				int get_height(); //or depth
+				bool is_exists(int item);
+				bool is_valid_bst();
+				bool is_mirror();
+				bool is_height_balanced();
+				
+				bst_node* get_minium_value_node();
+				bst_node* get_maximum_value_node();
+				bst_node* get_kth_largest_node();
+				bst_node* get_kth_smallest_node();
+				bst_node *get_lowest_common_ancestor_node(bst_node *n1, bst_node *n2);
+				BST *get_inverted_bst(BST *bst);
+
+				//Flatten the BST and returns its left most node
+				bst_node* flatten_bst();
+
+				//Transform BST into its right sibling tree and returns its root pointer
+				bst_node* right_sibling_tree();
+				
+				
+				void print_node_with_height();
+				void get_node_with_height(vector<int,int>& array);
+
+        void print_in_order_traversal();
+				void get_in_order_traversal(vector<int>& array);
+
+        void print_pre_order_traversal();
+				void get_pre_order_traversal(vector<int>& array);
+				
+        void print_post_order_traversal();
+				void get_post_order_traversal(vector<int>& array);
+
+				void level_order_traversal();
+				void get_level_order_traversal(vector<int>& array);
+
+				void print_iterative_in_order_traversal();
+
 };
 
 BST::BST(vector<int> items)
@@ -37,7 +80,8 @@ BST::BST(vector<int> items)
         add_node(item);
 };
 
-bst_node * BST::insert(bst_node *node, int item)
+//bst_node * BST::insert(bst_node *node, int item)
+bst_node * insert(bst_node *node, int item)
 {
     if (node == NULL)
         return new bst_node(item);
@@ -69,18 +113,19 @@ void BST::add_node(int item)
     this->root = insert(this->root, item);
 }
 
-void BST::_in_order_traversal(bst_node *node)
+//void BST::_print_in_order_traversal(bst_node *node)
+void _print_in_order_traversal(bst_node *node)
 {
     if (node == NULL)
         return;
-    _in_order_traversal(node->left);
+    _print_in_order_traversal(node->left);
     cout<< node->item << " ";
-    _in_order_traversal(node->right);
+    _print_in_order_traversal(node->right);
 }
 
-void BST::in_order_traversal()
+void BST::print_in_order_traversal()
 {
-    _in_order_traversal(this->root);    
+    _print_in_order_traversal(this->root);    
 }
 
 int main(void)
@@ -92,7 +137,7 @@ int main(void)
     bst->add_node(99);
     bst->add_node(-10);
     cout<<"Tree Items are: " << endl;
-    bst->in_order_traversal();
+    bst->print_in_order_traversal();
     cout << endl;
 
     return 0;
