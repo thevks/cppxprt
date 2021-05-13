@@ -19,15 +19,15 @@ struct Node* newNode(int data)
 }
 
 // Function to find height of a tree
-int height(Node* root, int& ans, Node*(&k), int& lh, int& rh,
-													int& f)
+//int height(Node* root, int& ans, Node*(&k), int& lh, int& rh, int& f)
+int height(Node* root, int& ans, Node*(&k), int& lh, int& rh)
 {
 	if (root == NULL)
 		return 0;
 
-	int left_height = height(root->left, ans, k, lh, rh, f);
+	int left_height = height(root->left, ans, k, lh, rh);
 
-	int right_height = height(root->right, ans, k, lh, rh, f);
+	int right_height = height(root->right, ans, k, lh, rh);
 
 	// update the answer, because diameter of a
 	// tree is nothing but maximum value of
@@ -117,7 +117,7 @@ void diameter(Node* root)
 	Node* k;
 	
 
-	int height_of_tree = height(root, ans, k, lh, rh, f);
+	int height_of_tree = height(root, ans, k, lh, rh);
 	
 
 	int lPath[100], pathlen = 0;
