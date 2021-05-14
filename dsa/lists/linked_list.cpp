@@ -9,7 +9,8 @@ public:
 
 class linked_list{
 private:
-    node* head, *tail;
+    node* head;
+    node* tail;
 public:
     linked_list() { // constructor
         head = NULL;
@@ -22,7 +23,36 @@ public:
     void display();
     void node_swap_iterative();
     void node_swap_recusive();
+    void zipped_linked_list();
+    bool is_palindrome();
+
+    void partition_list_around_value(int);
 };
+
+node * _partition_list_around_value(node *head, int x)
+{
+    
+    node *smaller_head, *smaller_tail;
+    node *greater_head, *greater_tail;
+    node *equal_head, *equal_tail;
+
+    //Process the original list and create three list
+    //{
+
+    //}
+
+    greater_tail->next = NULL;
+
+    smaller_tail->next = equal_head;
+    equal_tail->next = greater_head;
+
+    return smaller_head;
+}
+
+void linked_list::partition_list_around_value(int x)
+{
+    this->head = _partition_list_around_value(this->head, x);
+}
 
 node * _node_swap_recusive(node *head)
 {
@@ -81,15 +111,16 @@ void linked_list::add_node(int val) {
     }
 
     else {
+        /*
         tail->next = newnode;
         tail = tail->next;
-        /*
+        */
         node* temp = head; // head is not NULL
         while (temp->next != NULL) { 
             temp = temp->next; // go to end of list
         }
         temp->next = newnode; // linking to newnode
-        */
+        
     }
 }
 
@@ -119,6 +150,27 @@ void linked_list::display() {
         }
         cout << endl;
     }
+}
+
+void _zipped_linked_list(node *head)
+{
+    //split the list into first & second list
+    //Reverse seond list
+    //Start from first list. Merge two lists nodes - alternatively
+}
+
+//Returns the zipped version of the list
+void linked_list:: zipped_linked_list()
+{
+    _zipped_linked_list(this->head);    
+}
+
+bool linked_list::is_palindrome()
+{
+    //use slow & fast pointers to identify middle of list 
+    //Reverse second half of the list
+    //compare the nodes in first half and second half
+    return false;
 }
 
 int main() {
