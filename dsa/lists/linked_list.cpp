@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class node {
+struct node {
 public:
     int data;
     node* next;
@@ -16,12 +16,59 @@ public:
         tail = NULL;
     }
     ~linked_list() {}; // destructor
-    void add_node(int val);
-    void delete_node(int val);
+    void add_node(int);
+    void delete_node(int);
     void reverse_list();
     void display();
-
+    void node_swap_iterative();
+    void node_swap_recusive();
 };
+
+node * _node_swap_recusive(node *head)
+{
+    if (head == NULL || head->next == NULL)
+        return head;
+
+    node *next_node = head->next;
+    head->next = _node_swap_recusive(head->next->next);
+    next_node->next = head;
+
+    return next_node;
+}
+
+void linked_list::node_swap_recusive()
+{
+    this->head = _node_swap_recusive(this->head);
+}
+
+node* _node_swap_iterative(node *head)
+{
+    node *temp = new node();
+    temp->next = head;
+
+    node *prev = temp;
+    node *first;
+    node *second;
+
+    while ((prev->next != NULL) && (prev->next->next != NULL))
+    {
+        first = prev->next;
+        second = prev->next->next;
+
+        first->next = second->next;
+        second->next = first;
+        prev->next = second;
+
+        prev = first;             
+    }
+
+    return temp->next;   
+}
+
+void linked_list::node_swap_iterative()
+{
+    this->head = _node_swap_iterative(this->head);   
+}
 
 // function to add node to a list
 void linked_list::add_node(int val) {
@@ -86,6 +133,13 @@ int main() {
     list->reverse_list();
     cout << "Reversed Linked List data" << endl;
     list->display();
+
+    list->node_swap_iterative();
+    list->display();
+
+    list->node_swap_recusive();
+    list->display();
+
     delete list;
     return 0;
 }
